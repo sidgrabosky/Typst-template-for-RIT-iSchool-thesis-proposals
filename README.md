@@ -38,6 +38,11 @@ I like that you can script and use JS functions in your document. It's really ni
   grant-year: "2024",
   is-project: true,     // false for thesis
   is-proposal: true,    // false for final report
+
+  // Abstract content
+  abstract: [
+    Your abstract goes here...
+  ]
 )
 
 // Optional: Add dedication and acknowledgments
@@ -49,17 +54,26 @@ I like that you can script and use JS functions in your document. It's really ni
   I would like to thank...
 ]
 
-// Abstract content
-#abstract-content[
-  Your abstract goes here...
-]
-
 // Main document content
 = Introduction
 Your content here...
 ```
 
 4. Compile with: `typst compile your-document.typ`
+
+## Alternate Title Rendering
+
+If your title happens to cause awkward hyphenation or breaks on the main page, you can use the `display-title` parameter to proide an alternate version and add manual line breaks:
+
+```typst
+#show: rit-ischool-capstone.with(
+  title: "A Very Long Project Title That Causes Formatting Issues",
+  display-title: [A Very Long Project Title\nThat Causes Formatting Issues],
+  // ...
+)
+```
+
+The `display-title` is used only on the title page for optimal formatting, while the original `title` is used everywhere else (abstract page, headers, metadata).
 
 ## Citations and Bibliography
 

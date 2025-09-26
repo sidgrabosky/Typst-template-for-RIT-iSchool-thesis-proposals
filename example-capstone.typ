@@ -2,6 +2,7 @@
 
 #show: rit-ischool-capstone.with(
   title: "The Title of the Project",
+  // display-title: [The Title of the\n Project],  // Uncomment to provide an alternate main title version. Useful if you want to control linebreaks manually.
   author: "Student's Name",
   degree-type: "Master of Science",
   degree-symbol: "M.S.",
@@ -22,6 +23,13 @@
   include-tables-list: true,
 
   // previous-degrees: "B.S. Computer Science, Some University, 2022", // Optional
+
+  // Abstract content
+  abstract: [
+    This should be a short description of the work and the results: about 250 words in a paragraph or two summarizing your project. Note that abstracts are meant to be read independently from the rest of the project report so you cannot cite your paper or other papers in it. It would be useful to examine other abstracts in the papers you have read to understand what an abstract really is.
+
+    In the proposal, the abstract should just say what you will do. In the report, the abstract must say what you did briefly. This template can be used for both the proposal and the report.
+  ]
 )
 
 // Optional: Dedication page
@@ -34,12 +42,6 @@
   I am grateful for ...
 ]
 
-// Abstract content
-#abstract-content[
-  This should be a short description of the work and the results: about 250 words in a paragraph or two summarizing your project. Note that abstracts are meant to be read independently from the rest of the project report so you cannot cite your paper or other papers in it. It would be useful to examine other abstracts in the papers you have read to understand what an abstract really is.
-
-  In the proposal, the abstract should just say what you will do. In the report, the abstract must say what you did briefly. This template can be used for both the proposal and the report.
-]
 
 // Main document content starts here
 

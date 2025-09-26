@@ -1,6 +1,7 @@
 #let rit-ischool-capstone(
   // Document metadata
   title: "Title of the Project",
+  display-title: none, // Optional: title with manual line breaks for title page
   author: "Student's Name",
   degree-type: "Master of Science",
   degree-symbol: "M.S.",
@@ -25,6 +26,9 @@
 
   // Previous degrees (optional)
   previous-degrees: none,
+
+  // Abstract content
+  abstract: none,
 
   // Document body
   body
@@ -99,53 +103,66 @@
       set align(center)
       set par(leading: 0.6em)
 
-      // Large title at top
-      text(size: 22pt, weight: "bold", title)
-      v(1.0in, weak: true)
+      // Top section - title and author
+      {
+        // Large title at top (use display-title if provided, otherwise title)
+        text(size: 22pt, weight: "bold", if display-title != none { display-title } else { title })
+        v(0.8in, weak: true)
 
-      // "by" section
-      text(size: 14pt)[by]
-      v(0.3in)
-      text(size: 14pt, weight: "bold", author)
-      if previous-degrees != none {
-        v(0.2in)
-        text(size: 12pt, previous-degrees)
+        // "by" section
+        text(size: 14pt)[by]
+        v(0.3in)
+        text(size: 14pt, weight: "bold", author)
+        if previous-degrees != none {
+          v(0.2in)
+          text(size: 12pt, previous-degrees)
+        }
       }
-      v(1.2in, weak: true)
 
-      // Project/Thesis submission text
-      text(size: 14pt)[
-        A #if is-project [Project] else [Thesis]
-        #if is-proposal [ Proposal] else if is-project [ Report]
-        #if is-proposal [] else [ ]
-        Submitted
-      ]
-      linebreak()
-      text(size: 14pt)[in]
-      linebreak()
-      text(size: 14pt)[Partial Fulfillment of the]
-      linebreak()
-      text(size: 14pt)[Requirements for the Degree of]
-      linebreak()
-      text(size: 14pt, degree-type)
-      v(0.4in)
+      // Flexible spacing to push content apart
+      v(1fr)
 
-      text(size: 14pt)[Supervised by]
-      v(0.3in)
-      text(size: 14pt, committee-chair)
-      v(1.0in, weak: true)
+      // Middle section - submission text and supervisor
+      {
+        // Project/Thesis submission text
+        text(size: 14pt)[
+          A #if is-project [Project] else [Thesis]
+          #if is-proposal [ Proposal] else if is-project [ Report]
+          #if is-proposal [] else [ ]
+          Submitted
+        ]
+        linebreak()
+        text(size: 14pt)[in]
+        linebreak()
+        text(size: 14pt)[Partial Fulfillment of the]
+        linebreak()
+        text(size: 14pt)[Requirements for the Degree of]
+        linebreak()
+        text(size: 14pt, degree-type)
+        v(0.4in)
 
-      // Institution information
-      text(size: 12pt)[School of Information]
-      v(0.3in)
-      text(size: 12pt)[B. Thomas Golisano College of Computing and Information Sciences]
-      linebreak()
-      text(size: 12pt)[Rochester Institute of Technology]
-      linebreak()
-      text(size: 12pt)[Rochester, New York]
-      v(0.3in)
+        text(size: 14pt)[Supervised by]
+        v(0.3in)
+        text(size: 14pt, committee-chair)
+      }
 
-      text(size: 12pt, grant-month + " " + grant-year)
+      // Flexible spacing to push bottom content down
+      v(1fr)
+
+      // Bottom section - pinned to bottom
+      {
+        // Institution information
+        text(size: 12pt)[School of Information]
+        v(0.3in)
+        text(size: 12pt)[B. Thomas Golisano College of Computing and Information Sciences]
+        linebreak()
+        text(size: 12pt)[Rochester Institute of Technology]
+        linebreak()
+        text(size: 12pt)[Rochester, New York]
+        v(0.3in)
+
+        text(size: 12pt, grant-month + " " + grant-year)
+      }
     }
   )
 
@@ -253,7 +270,11 @@
 
     v(0.5in)
 
-    // Abstract content will be inserted here by user
+    // Abstract content
+    if abstract != none {
+      set par(first-line-indent: 0pt)
+      abstract
+    }
   }
 
   pagebreak()
@@ -359,11 +380,6 @@
   )
 }
 
-// Helper function for abstract content
-#let abstract-content(content) = {
-  set par(first-line-indent: 0pt)
-  content
-}
 
 // Helper function for bibliography
 #let bibliography-page(bib-file) = {
